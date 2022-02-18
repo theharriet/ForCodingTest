@@ -3,75 +3,56 @@
 # data = sys.stdin.readline().rstrip()
 # print(data)
 
-# i = 1
-# result = 0
+#  global : 해당 함수에서는 지역 변수를 만들지 않고, 함수 바깥에 선언된 변수를 바로 참조
 
-# # 1 ~ 9 까지의 합
-# # while i <=9: 
-# #     result += i
-# #     i += 1
+a = 0
 
-# # 1 ~ 9 까지 홀수의 합
-# while i <= 9:
-#     if i%2 == 1:
-#         result += i
-#     i += 1
+def func():
+    global a
+    a += 1
 
-# print(result)
+for i in range(10):
+    func()
 
-# array = [9, 8, 7, 6, 5]
-# # array = (9, 8, 7, 6, 5) 튜플도 가능
+print(a)
 
-# for x in array:
-#     print(x)
+# 여러개의 반환값
 
+def operator(a, b) :
+    return a + b, a - b, a * b, a / b
 
-# range(시작 값, 끝 값 + 1) / 인자를 하나만 넣으면 자동으로 시작 값은 0 / for문에서 연속적인 값을 차례대로 순회할 때 주로 사용
-
-# result = 0
-
-# # i는 1부터 9까지의 모든 값을 순회
-# for i in range(1, 10):
-#     result += i
-
-# print(result)
+a, b, c, d = operator(3, 7)
+print(a, b, c, d)
 
 
-#### continue : 반복문에서 남은 코드의 실행을 건너뛰고, 다음 반복을 진행하고자 할 때
+###### 람다 함수
 
-# 1~9까지 홀수의 합
-# result = 0
+print((lambda a, b: a + b)(3, 5)) # 이 함수가 여러번 쓰이지 않고 해당줄에서 한번 쓰이고 말때 이런식으로 간단하게 쓸수있음
 
-# for i in range(1, 10):
-#     if i % 2 == 0:
-#         continue
-#     result += i
-# print(result)
+#원래는 이런식
+def add(a, b):
+    return a + b
+print(add(4,5))
 
-  # line 42 ~ 48 과 line 14 ~ 20은 똑같은 결과.
+## 함수 자체를 입력으로 받는 함수 쓸때 주로 쓰임
 
+array = [('홍길동', 50), ('이순신', 32), ('아무개', 74)]
 
-############## ex1
-# scores = [90, 85, 77, 65, 97]
+def my_key(x):
+    return x[1]
 
-# for i in range(5):
-#     if scores[i] >= 80:
-#         print(i+1, "번 학생은 합격입니다.")
+print(sorted(array, key = my_key)) # key 속성의 값으로 정렬기준을 넣어줄수 있음(나이로 정렬)
 
-############## ex2
-# scores = [90, 85, 77, 65, 97]
-# cheating_student_list = {2, 4}
+print(sorted(array, key=lambda x: x[1]))
 
-# for i in range(5):
-#     if i + 1 in cheating_student_list:
-#         continue
-#     if scores[i] >= 80:
-#         print(i+1, "번 학생은 합격입니다.")
+#  다른 예시: 여러개의 리스트에 적용
+list1 = [1, 2, 3, 4, 5]
+list2 = [6, 7, 8, 9, 10]
 
-#################구구단 : 중첩된 반복문
+result = map(lambda a, b: a + b, list1, list2) 
+      # map => 각 원소에 어떤 함수를 적용할지를 설정
 
-for i in range(2, 10):
-    for j in range(1, 10):
-        print (i, "X", j, "=", i * j)
-    print()
+print(list(result))
 
+# https://www.youtube.com/watch?v=Lytj_xcw8mE&list=PLRx0vPvlEmdBFBFOoK649FlEMouHISo8N&index=1
+# 2:04:07
