@@ -29,5 +29,5 @@ for i in range(4):
     ny = y + dy[i]
     print(nx, ny)
 
-# 언제쯤이면..
+# push push baby
 
