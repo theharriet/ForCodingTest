@@ -29,5 +29,5 @@ for i in range(4):
     ny = y + dy[i]
     print(nx, ny)
 
-# push push baby
+# push push baby 나를 알아줘
 
