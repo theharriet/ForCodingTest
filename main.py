@@ -29,6 +29,6 @@ for i in range(4):
     print(nx, ny)
 
   
-# 다시 자바
+# my birthday
 
 
