@@ -29,4 +29,4 @@ for i in range(4):
     print(nx, ny)
 
 
-
+#when r u gonna study for real, harriet?
