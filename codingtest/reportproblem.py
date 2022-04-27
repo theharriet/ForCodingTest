@@ -60,3 +60,33 @@ id_list	report	k	result
 
 "ryan"이 "con"을 4번 신고했으나, 주어진 조건에 따라 한 유저가 같은 유저를 여러 번 신고한 경우는 신고 횟수 1회로 처리합니다. 따라서 "con"은 1회 신고당했습니다. 3번 이상 신고당한 이용자는 없으며, "con"과 "ryan"은 결과 메일을 받지 않습니다. 따라서 [0, 0]을 return 합니다.
 """
+
+from collections import defaultdict
+
+
+def solution(id_list, report, k):
+    answer = [0] * len(id_list)
+    
+    # 주어지는 report 리스트를 중복 제거 해주는 것이 이 문제의 핵심이었다.
+    # 이 한줄의 코드 없이 제출하면 수많은 시간초과를 만날 수 있다.
+    report = set(report)
+    
+    user_list_who_i_report = defaultdict(set)
+    num_of_reported = defaultdict(int)
+    suspended = []
+
+    for r in report:
+        do_report, be_reported = r.split()
+        
+        num_of_reported[be_reported] += 1
+        user_list_who_i_report[do_report].add(be_reported)
+        
+        if num_of_reported[be_reported] == k:
+            suspended.append(be_reported)
+
+    for s in suspended:
+        for i in range(len(id_list)):
+            if s in user_list_who_i_report[id_list[i]]:
+                answer[i] += 1
+
+    return answer
