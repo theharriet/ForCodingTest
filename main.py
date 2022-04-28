@@ -27,5 +27,6 @@ for i in range(4):
     ny = y + dy[i]
     print(nx, ny)
 
+# 왜저래
 
 
