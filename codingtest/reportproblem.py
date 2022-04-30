@@ -63,30 +63,25 @@ id_list	report	k	result
 
 from collections import defaultdict
 
-
 def solution(id_list, report, k):
-    answer = [0] * len(id_list)
+    answer = []
+    number_of_reported = defaultdict(int)
+    user_stack = defaultdict(list)
+
+    [user_stack[id] for id in id_list]
+    [number_of_reported[id] for id in id_list]
     
-    # 주어지는 report 리스트를 중복 제거 해주는 것이 이 문제의 핵심이었다.
-    # 이 한줄의 코드 없이 제출하면 수많은 시간초과를 만날 수 있다.
-    report = set(report)
+    for line in set(report):
+        user_id, reported_id = line.split()
+        user_stack[user_id].append(reported_id)
+        number_of_reported[reported_id] += 1
     
-    user_list_who_i_report = defaultdict(set)
-    num_of_reported = defaultdict(int)
-    suspended = []
-
-    for r in report:
-        do_report, be_reported = r.split()
-        
-        num_of_reported[be_reported] += 1
-        user_list_who_i_report[do_report].add(be_reported)
-        
-        if num_of_reported[be_reported] == k:
-            suspended.append(be_reported)
-
-    for s in suspended:
-        for i in range(len(id_list)):
-            if s in user_list_who_i_report[id_list[i]]:
-                answer[i] += 1
-
+    blocked_user = [id for id, val in number_of_reported.items() if val >=k]
+    for id, val in user_stack.items():
+        count = 0 
+        for black_user in blocked_user:
+            if black_user in val:
+                count += 1
+        answer.append(count)
+                
     return answer
