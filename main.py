@@ -4,26 +4,25 @@
 # 재귀 함수(Recursive Function)란 자기 자신을 다시 호출하는 함수
 #  - DFS를 실질적으로 구현할 때 자주 사용 됨.  
 
-# 단순한 형태의 재귀 함수 예제
-#  - '재귀 함수를 호출합니다.'라는 문자열을 무한히 출력.
-#  - 파이썬에서는 어느정도 출력하다가 최대 재귀 깊이 초과 메시지가 출력.
-def recursive_function():
-    print('재귀 함수를 호출합니다.')
-    recursive_function()
+# 팩토리얼 구현 예제
+# n! = 1 * 2 * 3 * ... * (n-1) * n
+#  0!과 1!의 값은 1
 
-recursive_function()
+# 반복적으로 구현한 n!
+def factorial_iterative(n):
+    result = 1
+    # 1부터 n까지의 수를 차례대로 곱하기
+    for i in range(1, n + 1):
+        result *= i
+    return result
 
-# 별도로 while이나 for문을 이용하지 않고도 어떤 내용을 반복적으로 수행 가능. 다만, 일반적으로 무한루프를 이용하지 않을 거라면 재귀함수를 문제 풀이에서 사용할 때는 재귀 함수의 종료 조건을 반드시 명시. 종료 조건을 제대로 명시하지 않으면 함수가 무한히 호출될 수 있다.
+# 재귀적으로 구현한 n!
+def factorial_recursive(n):
+    if n <= 1: # n이 1 이하인 경우 1을 반환
+        return 1
+    # n! = n * (n - 1)!를 그대로 코드로 작성하기
+    return n * factorial_recursive(n - 1)
 
-# 종료 조건을 포함한 재귀 함수 예제
-def recursive_function(i):
-   # 100번째 호출을 했을 때 종료되도록 종료 조건 명시
-    if i == 100:
-        return
-    print(i, '번째 재귀 함수에서', i + 1, '번째 재귀함수를 호출합니다.')
-    recursive_function(i + 1)
-    print(i, '번째 재귀함수를 종료합니다.')
-
-recursive_function(1)
-
-# 이처럼 재귀함수를 이용하게 되면 마치 스택에 데이터를 넣었다가 꺼내는 거와 마찬가지로 각각의 함수에 대한 정보가 실제로 스택프레임에 담기게 되어 차례대로 호출되어 가장 마지막에 호출된 함수부터 차례대로 종료가 되어 결과적으로 첫번째로 호출했던 함수까지 종료되는걸 확인
+# 각각의 방식으로 구현한 n! 출력(n = 5)
+print('반복적으로 구현:', factorial_iterative(5))
+print('재귀적으로 구현:', factorial_recursive(5))
