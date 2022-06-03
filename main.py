@@ -4,25 +4,21 @@
 # 재귀 함수(Recursive Function)란 자기 자신을 다시 호출하는 함수
 #  - DFS를 실질적으로 구현할 때 자주 사용 됨.  
 
-# 팩토리얼 구현 예제
-# n! = 1 * 2 * 3 * ... * (n-1) * n
-#  0!과 1!의 값은 1
+# 최대공약수 계산(유클리드 호제법) 예제
+# 두개의 자연수에 대한 최대공약수를 구하는 대표적인 알고리즘으로는 유클리드 호제법이 있다.
 
-# 반복적으로 구현한 n!
-def factorial_iterative(n):
-    result = 1
-    # 1부터 n까지의 수를 차례대로 곱하기
-    for i in range(1, n + 1):
-        result *= i
-    return result
+# 유클리드 호제법
+    # 두 자연수 A, B에 대하여 (A > B) A를 B로 나눈 나머지를 R
+    # 이 때 A와 B의 최대공약수는 B와 R의 최대공약수와 같다
+# 유클리드 호제법의 아이디어를 그대로 재귀 함수로 작성
 
-# 재귀적으로 구현한 n!
-def factorial_recursive(n):
-    if n <= 1: # n이 1 이하인 경우 1을 반환
-        return 1
-    # n! = n * (n - 1)!를 그대로 코드로 작성하기
-    return n * factorial_recursive(n - 1)
+def gcd(a, b):
+    if a % b == 0: #즉, a가 b의 배수라면
+        return b
+    else:
+        return gcd(b, a % b)
 
-# 각각의 방식으로 구현한 n! 출력(n = 5)
-print('반복적으로 구현:', factorial_iterative(5))
-print('재귀적으로 구현:', factorial_recursive(5))
+print(gcd(192, 162))
+
+# 모든 재귀 함수는 반복문을 이용하여 동일한 기능을 구현할 수 있다.
+# 컴퓨터가 함수를 연속적으로 호출하면 컴퓨터 메모리 내부의 스택 프레임에 쌓인다. 그래서 스택을 사용해야 할 때 구현상 스택 라이브러리 대신에 재귀함수를 이용하는 경우가 많다.
