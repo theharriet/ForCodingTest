@@ -1,26 +1,38 @@
-# 음료수 얼려먹기 문제
 
-# N × M 크기의 얼음 틀이 있다. 구멍이 뚫려 있는 부분은 0, 칸막이가 존재하는 부분은 1로 표시된다.
-# 구멍이 뚫려 있는 부분끼리 상, 하, 좌, 우로 붙어 있는 경우 서로 연결되어 있는 것으로 간주한다.
-# 이때 얼음 틀의 모양이 주어졌을 때 생성되는 총 아이스크림의 개수를 구하는 프로그램을 작성하라.
-# 다음의 4 × 5 얼음 틀 예시에서는 아이스크림이 총 3개가 생성된다
-# 입력
-# 첫 번째 줄에 얼음 틀의 세로 길이 N과 가로 길이 M이 주어진다. (1 <= N, M <= 1,000)
-# 두 번째 줄부터 N + 1 번째 줄까지 얼음 틀의 형태가 주어진다.
-# 이때 구멍이 뚫려있는 부분은 0, 그렇지 않은 부분은 1이다.
-# 출력
-# 한 번에 만들 수 있는 아이스크림의 개수를 출력한다.
 
-# 입력 예시 1
+## ai studio System Action 개발 방법
 
-#4 5
-#00110
-#00011
-# 11111
-# 00000
-# 출력 예시 1
-# 3
+# FormAction - Basics
+# 공식문서 : https://legacy-docs-v1.rasa.com/core/forms/#form-basics
+#  rasa_sdk.forms.FormAction 상속
 
-n, m = map(int,input().split())
+# 필수 메서드
+def 액션의이름(self) -> Text:
+    """Unique identifier of the form"""
+    return "user_infor_form"
+
+@staticmethod
+def required_slots(tracker: Tracker) -> List[Text]:
+    """A list of required slots that the form has to fill"""
+    return ['이름', '휴대폰번호']
+  # required_slots : submit method를 실행하기 위해 필요한 slot 목록
+
+# submit : slot이 모두 채워졌을 때 실행되는 메서드
+def submit(self, 
+          dispatcher: CollectingDispatcher,
+          tracker: Tracker,
+          domain: Dict[Text, Any]
+          ) -> List[Dict]:
+  # slot name과 다음 메서드로 slot value를 가져올 수 있다.
+    name = tracker.get_slot('이름')
+    phonenum = tracker.get_slot('휴대폰번호')
+
+    # ...(중략)...
+
+  # db에 저장 (레거시 생략)
+
+    dispatcher.utter_message(f'[예약번호: {reservNum}]\n{name} 고객님 예약 완료되었습니다. 저희 호텔을 이용해주셔서 감사합니다.')
+
+    return []
 
 
