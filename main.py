@@ -21,3 +21,6 @@
 # 출력 예시 1
 # 3
 
+n, m = map(int,input().split())
+
+
