@@ -20,3 +20,5 @@ def run(self, dispatcher, tracker, domain, ):
     return [AllSlotsReset()] #대화종료하니까 모든slot을 지워.
 
 # form은 아니지만 조금 복잡한 내용이 들어가야할 때 or 코드상의 필요가 있을 때 쓰는 action
+
+# Ready Action!
